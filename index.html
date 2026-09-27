@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksplorasi Dunia Kopi - Dari Kebun Hingga Cangkir</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#2B1704',
+                        roast: '#3D2314',
+                        coffee: '#6F4E37',
+                        mocha: '#8B5A2B',
+                        latte: '#C8A2C8',
+                        cream: '#FDFBF7',
+                        warmgray: '#F3EFEA',
+                        gold: '#D4AF37'
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FDFBF7;
+            color: #2B1704;
+        }
+        .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        .tab-btn.active {
+            background-color: #3D2314;
+            color: #ffffff;
+            border-color: #3D2314;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(111, 78, 55, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-cream text-espresso antialiased selection:bg-mocha selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-espresso/95 backdrop-blur-md text-cream shadow-xl transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchSection('hero')">
+                    <div class="w-10 h-10 rounded-full bg-mocha flex items-center justify-center text-white text-xl shadow-inner">
+                        <i class="fa-solid font-bold fa-mug-hot"></i>
+                    </div>
+                    <div>
+                        <span class="serif-font text-2xl font-bold tracking-wide text-cream block leading-none">Nusantara Coffee</span>
+                        <span class="text-[10px] text-amber-200 tracking-widest uppercase font-semibold">Ensiklopedi & Panduan</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu Nav -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-sm font-medium">
+                    <button onclick="switchTab('pengenalan')" class="nav-link px-3 py-2 rounded-lg hover:bg-roast hover:text-amber-200 transition">Apa Itu Kopi</button>
+                    <button onclick="switchTab('budidaya')" class="nav-link px-3 py-2 rounded-lg hover:bg-roast hover:text-amber-200 transition">Budidaya</button>
+                    <button onclick="switchTab('seleksi')" class="nav-link px-3 py-2 rounded-lg hover:bg-roast hover:text-amber-200 transition">Seleksi Biji</button>
+                    <button onclick="switchTab('hama')" class="nav-link px-3 py-2 rounded-lg hover:bg-roast hover:text-amber-200 transition">Hama & Penyakit</button>
+                    <button onclick="switchTab('kuis')" class="nav-link px-4 py-2 rounded-lg bg-mocha text-white hover:bg-amber-700 transition shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad"></i> Kuis Kopi
+                    </button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-cream p-2 rounded-md hover:bg-roast focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-roast border-t border-mocha/30 px-4 pt-2 pb-6 space-y-2">
+            <button onclick="switchTab('pengenalan'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md hover:bg-espresso text-cream font-medium">Apa Itu Kopi</button>
+            <button onclick="switchTab('budidaya'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md hover:bg-espresso text-cream font-medium">Budidaya</button>
+            <button onclick="switchTab('seleksi'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md hover:bg-espresso text-cream font-medium">Seleksi Biji</button>
+            <button onclick="switchTab('hama'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md hover:bg-espresso text-cream font-medium">Hama & Penyakit</button>
+            <button onclick="switchTab('kuis'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md bg-mocha text-white font-medium">Kuis Kopi Interaktif</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero-section" class="relative bg-espresso text-white py-24 lg:py-32 overflow-hidden border-b-4 border-mocha">
+        <div class="absolute inset-0 opacity-25 bg-[radial-gradient(#C8A2C8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-mocha/40 border border-amber-500/30 text-amber-300 text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid font-bold fa-seedling"></i> Dari Perkebunan Hingga Cangkir
+                    </div>
+                    <h1 class="serif-font text-4xl sm:text-5xl lg:text-6xl font-extrabold text-cream leading-tight">
+                        Eksplorasi Mahakarya <span class="text-amber-400 italic">Dunia Kopi</span>
+                    </h1>
+                    <p class="text-amber-100/80 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Pelajari secara mendalam perjalanan kopi: sejarah, jenis varietas, teknik budidaya, kontrol kualitas biji, hingga manajemen hama terpadu.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                        <button onclick="switchTab('pengenalan')" class="px-8 py-4 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-semibold shadow-lg hover:shadow-amber-600/30 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                            <span>Mulai Membaca</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="scrollToBrewing()" class="px-8 py-4 rounded-xl border border-amber-200/30 hover:bg-white/10 text-cream font-semibold transition-all duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-calculator"></i> Kalkulator Seduh
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hero Visual Graphic -->
+                <div class="relative flex justify-center">
+                    <div class="w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-br from-mocha/60 to-roast flex items-center justify-center p-8 shadow-2xl border border-amber-500/20 relative">
+                        <div class="text-center space-y-4">
+                            <i class="fa-solid fa-seedling text-6xl text-amber-400 animate-pulse"></i>
+                            <div class="text-amber-200 text-sm font-serif italic">"Kopi bukan sekadar minuman, melainkan proses panjang dedikasi & keahlian."</div>
+                        </div>
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-2 -left-2 bg-cream text-espresso px-4 py-3 rounded-xl shadow-lg border border-amber-200 flex items-center gap-3">
+                            <i class="fa-solid fa-award text-2xl text-amber-600"></i>
+                            <div class="text-xs">
+                                <p class="font-bold">Edukasi Terlengkap</p>
+                                <p class="text-gray-600">Sains & Praktik Lapangan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab Navigation Bar -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12 p-2 bg-warmgray/80 rounded-2xl border border-mocha/10 shadow-inner" id="tab-container">
+            <button onclick="switchTab('pengenalan')" id="btn-pengenalan" class="tab-btn active px-5 py-3 rounded-xl text-sm sm:text-base font-semibold transition-all flex items-center gap-2">
+                <i class="fa-solid fa-book-open"></i> 1. Apa Itu Kopi
+            </button>
+            <button onclick="switchTab('budidaya')" id="btn-budidaya" class="tab-btn px-5 py-3 rounded-xl text-sm sm:text-base font-semibold text-espresso hover:bg-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-tree"></i> 2. Budidaya Kopi
+            </button>
+            <button onclick="switchTab('seleksi')" id="btn-seleksi" class="tab-btn px-5 py-3 rounded-xl text-sm sm:text-base font-semibold text-espresso hover:bg-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-filter"></i> 3. Seleksi Biji
+            </button>
+            <button onclick="switchTab('hama')" id="btn-hama" class="tab-btn px-5 py-3 rounded-xl text-sm sm:text-base font-semibold text-espresso hover:bg-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-bug"></i> 4. Hama & Penyakit
+            </button>
+            <button onclick="switchTab('kuis')" id="btn-kuis" class="tab-btn px-5 py-3 rounded-xl text-sm sm:text-base font-semibold text-espresso hover:bg-white transition-all flex items-center gap-2">
+                <i class="fa-solid fa-circle-question"></i> 5. Kuis Kopi
+            </button>
+        </div>
+
+        <!-- TAB 1: APA ITU KOPI -->
+        <section id="tab-content-pengenalan" class="tab-content space-y-12">
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-mocha/10">
+                <div class="max-w-3xl">
+                    <span class="text-amber-700 font-semibold text-sm uppercase tracking-wider">Pengenalan Dasar</span>
+                    <h2 class="serif-font text-3xl sm:text-4xl font-bold text-espresso mt-2 mb-6">Definisi, Sejarah, dan Popularitas Kopi</h2>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-base sm:text-lg">
+                        <strong>Kopi</strong> adalah minuman hasil seduhan biji kopi yang telah disangrai dan dihaluskan menjadi bubuk. Biji kopi sendiri merupakan biji dari tanaman buah beri (sering disebut <em>coffee cherry</em>) dari genus <em>Coffea</em>, anggota famili Rubiaceae.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        Secara sejarah, kopi diperkirakan berasal dari wilayah <strong>Ethiopia</strong> (Afrika) pada abad ke-9, sebelum akhirnya berkembang pesat di Yaman dan wilayah Timur Tengah. Pada abad ke-17, tanaman kopi menyebar ke Eropa dan kawasan tropis lainnya, termasuk Indonesia. Kini, kopi telah menjadi salah satu komoditas perdagangan internasional terbesar dan bagian tak terpisahkan dari gaya hidup global.
+                    </p>
+                </div>
+
+                <!-- Stats Highlight -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-gray-100">
+                    <div class="p-4 rounded-xl bg-warmgray/50 border border-mocha/5 text-center">
+                        <span class="block text-2xl sm:text-3xl font-extrabold text-mocha">2.25 M</span>
+                        <span class="text-xs text-gray-600 font-medium">Cangkir Dikonsumsi/Hari</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-warmgray/50 border border-mocha/5 text-center">
+                        <span class="block text-2xl sm:text-3xl font-extrabold text-mocha">70+</span>
+                        <span class="text-xs text-gray-600 font-medium">Negara Penghasil Kopi</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-warmgray/50 border border-mocha/5 text-center">
+                        <span class="block text-2xl sm:text-3xl font-extrabold text-mocha">4 Utama</span>
+                        <span class="text-xs text-gray-600 font-medium">Spesies Biji Komersial</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-warmgray/50 border border-mocha/5 text-center">
+                        <span class="block text-2xl sm:text-3xl font-extrabold text-mocha">#3</span>
+                        <span class="text-xs text-gray-600 font-medium">Indonesia Produsen Dunia</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Varietas Kopi Cards -->
+            <div>
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <h3 class="serif-font text-3xl font-bold text-espresso">4 Jenis Biji Kopi Utama</h3>
+                    <p class="text-gray-600 text-sm mt-2">Setiap spesies memiliki profil rasa, habitat tumbuh, dan kadar kafein yang unik.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Arabika -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-amber-700 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">Populer (60-70%)</span>
+                                <i class="fa-solid fa-leaf text-amber-700 text-xl"></i>
+                            </div>
+                            <h4 class="serif-font text-2xl font-bold text-espresso mb-2">Arabika</h4>
+                            <p class="text-xs text-gray-500 mb-4"><em>Coffea arabica</em></p>
+                            <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                                <li><strong>Rasa:</strong> Kompleks, asam manis buah, aroma kaya.</li>
+                                <li><strong>Kafein:</strong> Rendah-Sedang (1.2% - 1.5%)</li>
+                                <li><strong>Bentuk:</strong> Lonjong, garis tengah bergelombang.</li>
+                                <li><strong>Ketinggian:</strong> 1.000 - 2.000 mdpl</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 text-xs text-amber-900 font-semibold">
+                            Cocok untuk: Specialty Coffee & Single Origin
+                        </div>
+                    </div>
+
+                    <!-- Robusta -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-amber-900 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="px-3 py-1 bg-amber-200 text-amber-900 rounded-full text-xs font-bold">Kuat & Pekat</span>
+                                <i class="fa-solid fa-shield-halved text-amber-900 text-xl"></i>
+                            </div>
+                            <h4 class="serif-font text-2xl font-bold text-espresso mb-2">Robusta</h4>
+                            <p class="text-xs text-gray-500 mb-4"><em>Coffea canephora</em></p>
+                            <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                                <li><strong>Rasa:</strong> Pahit, bold, nutty, beraroma cokelat gelap.</li>
+                                <li><strong>Kafein:</strong> Tinggi (2.2% - 2.7%)</li>
+                                <li><strong>Bentuk:</strong> Cenderung bulat, garis tengah lurus.</li>
+                                <li><strong>Ketinggian:</strong> 0 - 800 mdpl</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 text-xs text-amber-900 font-semibold">
+                            Cocok untuk: Espresso Blend & Kopi Tubruk
+                        </div>
+                    </div>
+
+                    <!-- Liberika -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-yellow-600 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">Langka</span>
+                                <i class="fa-solid font-bold fa-tree text-yellow-700 text-xl"></i>
+                            </div>
+                            <h4 class="serif-font text-2xl font-bold text-espresso mb-2">Liberika</h4>
+                            <p class="text-xs text-gray-500 mb-4"><em>Coffea liberica</em></p>
+                            <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                                <li><strong>Rasa:</strong> Smoky, woody, nuansa nangka & rempah.</li>
+                                <li><strong>Kafein:</strong> Sedang (1.2% - 1.4%)</li>
+                                <li><strong>Bentuk:</strong> Biji sangat besar & tidak simetris.</li>
+                                <li><strong>Ketinggian:</strong> Dataran rendah / Lahan Gambut</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 text-xs text-amber-900 font-semibold">
+                            Karakter khas: Ukuran biji terluas
+                        </div>
+                    </div>
+
+                    <!-- Ekselsa -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-stone-600 hover:shadow-xl transition duration-300 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="px-3 py-1 bg-stone-100 text-stone-800 rounded-full text-xs font-bold">Unik</span>
+                                <i class="fa-solid fa-lemon text-stone-700 text-xl"></i>
+                            </div>
+                            <h4 class="serif-font text-2xl font-bold text-espresso mb-2">Ekselsa</h4>
+                            <p class="text-xs text-gray-500 mb-4"><em>Coffea dewevrei</em></p>
+                            <ul class="text-sm text-gray-600 space-y-2 mb-6">
+                                <li><strong>Rasa:</strong> Tart, fruity, gabungan asam & pahit gelap.</li>
+                                <li><strong>Kafein:</strong> Rendah (1.0% - 1.2%)</li>
+                                <li><strong>Bentuk:</strong> Mirip liberika namun lebih kecil.</li>
+                                <li><strong>Ketinggian:</strong> Dataran rendah beriklim kering</li>
+                            </ul>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 text-xs text-amber-900 font-semibold">
+                            Karakter khas: Penambah kompleksitas rasa
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: BUDIDAYA KOPI -->
+        <section id="tab-content-budidaya" class="tab-content hidden space-y-10">
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-mocha/10">
+                <span class="text-amber-700 font-semibold text-sm uppercase tracking-wider">Langkah & Panduan Kebun</span>
+                <h2 class="serif-font text-3xl sm:text-4xl font-bold text-espresso mt-2 mb-6">Syarat Tumbuh & Tahapan Budidaya</h2>
+                
+                <!-- Syarat Tumbuh Grid -->
+                <div class="mb-10">
+                    <h3 class="text-xl font-bold text-espresso mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-sun text-amber-600"></i> Syarat Tumbuh Optimal
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-xl bg-warmgray/60 border border-mocha/10">
+                            <span class="text-xs text-amber-800 font-bold uppercase">Iklim & Suhu</span>
+                            <p class="text-sm font-semibold text-espresso mt-1">Arabika: 15 - 24°C</p>
+                            <p class="text-sm font-semibold text-espresso">Robusta: 24 - 30°C</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-warmgray/60 border border-mocha/10">
+                            <span class="text-xs text-amber-800 font-bold uppercase">Curah Hujan</span>
+                            <p class="text-sm font-semibold text-espresso mt-1">1.500 - 2.500 mm / tahun</p>
+                            <p class="text-xs text-gray-600">Bulan kering 2-3 bulan</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-warmgray/60 border border-mocha/10">
+                            <span class="text-xs text-amber-800 font-bold uppercase">Jenis Tanah</span>
+                            <p class="text-sm font-semibold text-espresso mt-1">Tanah Andosol / Vulkanik</p>
+                            <p class="text-xs text-gray-600">Kaya bahan organik, gembur</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-warmgray/60 border border-mocha/10">
+                            <span class="text-xs text-amber-800 font-bold uppercase">Keasaman Soil (pH)</span>
+                            <p class="text-sm font-semibold text-espresso mt-1">pH 5.5 - 6.5</p>
+                            <p class="text-xs text-gray-600">Drainase air yang baik</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tahapan Penanaman Timeline -->
+                <div>
+                    <h3 class="text-xl font-bold text-espresso mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-amber-600"></i> 4 Tahap Utama Pemeliharaan Tanaman
+                    </h3>
+                    <div class="space-y-6 relative border-l-2 border-mocha/20 ml-4 pl-6">
+                        <!-- Step 1 -->
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-0 w-8 h-8 rounded-full bg-mocha text-white flex items-center justify-center text-sm font-bold">1</div>
+                            <h4 class="text-lg font-bold text-espresso">Pemilihan Bibit unggul</h4>
+                            <p class="text-gray-600 text-sm mt-1">Gunakan bibit tersertifikasi yang tahan hama/penyakit. Pilih teknik perbanyakan generatif (biji) atau vegetatif (stek/sambungan) sesuai kondisi iklim.</p>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-0 w-8 h-8 rounded-full bg-mocha text-white flex items-center justify-center text-sm font-bold">2</div>
+                            <h4 class="text-lg font-bold text-espresso">Penanaman & Pohon Pelindung</h4>
+                            <p class="text-gray-600 text-sm mt-1">Tanam pohon pelindung (seperti Lamtoro / Sengon) beberapa bulan sebelum bibit kopi ditanam untuk menjaga tingkat naungan (sinar matahari 50-70%).</p>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-0 w-8 h-8 rounded-full bg-mocha text-white flex items-center justify-center text-sm font-bold">3</div>
+                            <h4 class="text-lg font-bold text-espresso">Pemangkasan Tanaman (Pruning)</h4>
+                            <p class="text-gray-600 text-sm mt-1">
+                                <strong>Pemangkasan Bentuk:</strong> Membentuk kerangka tanaman yang seimbang.<br>
+                                <strong>Pemangkasan Produksi:</strong> Membuang cabang tua / tidak produktif agar nutrisi fokus ke buah.
+                            </p>
+                        </div>
+                        <!-- Step 4 -->
+                        <div class="relative">
+                            <div class="absolute -left-[33px] top-0 w-8 h-8 rounded-full bg-mocha text-white flex items-center justify-center text-sm font-bold">4</div>
+                            <h4 class="text-lg font-bold text-espresso">Pemupukan Berkelanjutan</h4>
+                            <p class="text-gray-600 text-sm mt-1">Kombinasi pupuk organik (kompos/pupuk kandang) dan pupuk anorganik (N, P, K) teratur 2 kali setahun pada awal dan akhir musim hujan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: SELEKSI BIJI KOPI -->
+        <section id="tab-content-seleksi" class="tab-content hidden space-y-10">
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-mocha/10">
+                <span class="text-amber-700 font-semibold text-sm uppercase tracking-wider">Selection & Quality Control</span>
+                <h2 class="serif-font text-3xl sm:text-4xl font-bold text-espresso mt-2 mb-6">Panen Red Cherry & Pengendalian Mutu</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="space-y-4">
+                        <div class="p-6 rounded-2xl bg-amber-50 border border-amber-200">
+                            <h3 class="text-lg font-bold text-amber-900 flex items-center gap-2 mb-2">
+                                <i class="fa-solid fa-circle text-red-600"></i> Ciri Biji Matang Sempurna (Petik Merah)
+                            </h3>
+                            <p class="text-sm text-gray-700 leading-relaxed">
+                                Hanya buah kopi berflavour matang sempurna (<em>Red Cherry</em>) yang dipetik. Buah berwarna merah tua memiliki kandungan gula dan senyawa aroma paling tinggi. Petik rambang (mencampur buah hijau, kuning, dan hitam) akan menurunkan grade kualitas kopi secara drastis.
+                            </p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-warmgray border border-mocha/10">
+                            <h3 class="text-lg font-bold text-espresso mb-2">Sortir Biji Kopi Pascapanen</h3>
+                            <div class="space-y-3 text-sm text-gray-700">
+                                <div>
+                                    <strong>1. Sorti Basah (Rambang):</strong> Buah dipenyokkan/direndam dalam air. Buah mengapung (cacat/hampa) dipisahkan dari buah tenggelam (berisi/sehat).
+                                </div>
+                                <div>
+                                    <strong>2. Sorti Kering:</strong> Dilakukan setelah pengeringan/pulping untuk mengeliminasi biji pecah, berjamur, atau terserang hama.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table Defect / Cacat -->
+                    <div class="bg-warmgray/40 p-6 rounded-2xl border border-mocha/10">
+                        <h3 class="text-lg font-bold text-espresso mb-4">Klasifikasi Cacat Biji Kopi (Defect)</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs sm:text-sm">
+                                <thead>
+                                    <tr class="border-b border-mocha/20 text-amber-900">
+                                        <th class="py-2">Jenis Cacat</th>
+                                        <th class="py-2">Penyebab Utama</th>
+                                        <th class="py-2">Dampak Rasa</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-mocha/10 text-gray-700">
+                                    <tr>
+                                        <td class="py-2 font-semibold">Biji Hitam</td>
+                                        <td class="py-2">Busuk / Terlalu lama di pohon</td>
+                                        <td class="py-2 text-red-600">Apek, Sour, Pahit menusuk</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 font-semibold">Biji Gelondong</td>
+                                        <td class="py-2">Pengupasan tidak sempurna</td>
+                                        <td class="py-2 text-red-600">Mentah, Sepat (Astringent)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 font-semibold">Biji Berlubang</td>
+                                        <td class="py-2">Serangan Hama PBKo</td>
+                                        <td class="py-2 text-red-600">Aroma hilang, Cacathil</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 font-semibold">Biji Pecah</td>
+                                        <td class="py-2">Setelan mesin pulper salah</td>
+                                        <td class="py-2 text-red-600">Gosong saat roasting</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-[11px] text-gray-500 mt-4">*<strong>Specialty Grade</strong> toleransi cacat fisiknya maksimal 0-5 poin tanpa Primary Defect.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: HAMA DAN PENYAKIT -->
+        <section id="tab-content-hama" class="tab-content hidden space-y-10">
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-mocha/10">
+                <span class="text-amber-700 font-semibold text-sm uppercase tracking-wider">Perlindungan Tanaman</span>
+                <h2 class="serif-font text-3xl sm:text-4xl font-bold text-espresso mt-2 mb-6">Penanganan Hama, Penyakit & PHT</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+                    <!-- Hama Utama -->
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-serif font-bold text-espresso border-b pb-2">Hama Utama Kopi</h3>
+                        
+                        <div class="p-5 rounded-2xl bg-red-50/50 border border-red-100">
+                            <h4 class="font-bold text-red-900 flex items-center justify-between">
+                                Bubuk Buah Kopi (PBKo)
+                                <span class="text-xs bg-red-200 text-red-900 px-2 py-0.5 rounded">Sangat Berbahaya</span>
+                            </h4>
+                            <p class="text-xs text-gray-500 italic mb-2">Hypothenemus hampei</p>
+                            <p class="text-sm text-gray-700">Kumbang kecil yang menggerek ke dalam buah kopi dan bertelur di dalamnya. Menyebabkan buah berlubang, gugur, atau mutu biji rusak total.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-amber-50/50 border border-amber-100">
+                            <h4 class="font-bold text-amber-900">Kutu Hijau</h4>
+                            <p class="text-xs text-gray-500 italic mb-2">Coccus viridis</p>
+                            <p class="text-sm text-gray-700">Menghisap cairan pada daun muda dan cabang, mengundang munculnya jamur embun jelut yang menutupi fotosintesis.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-orange-50/50 border border-orange-100">
+                            <h4 class="font-bold text-orange-900">Nematoda Parasit</h4>
+                            <p class="text-xs text-gray-500 italic mb-2">Radopholus similis / Pratylenchus</p>
+                            <p class="text-sm text-gray-700">Cacing mikroskopis menyerang perakaran kopi, memicu pembusukan akar dan tanaman menjadi kerdil serta layu.</p>
+                        </div>
+                    </div>
+
+                    <!-- Penyakit Utama -->
+                    <div class="space-y-4">
+                        <h3 class="text-2xl font-serif font-bold text-espresso border-b pb-2">Penyakit Utama Kopi</h3>
+                        
+                        <div class="p-5 rounded-2xl bg-amber-50/50 border border-amber-100">
+                            <h4 class="font-bold text-amber-900 flex items-center justify-between">
+                                Karat Daun Kopi
+                                <span class="text-xs bg-amber-200 text-amber-900 px-2 py-0.5 rounded">Ancaman Arabika</span>
+                            </h4>
+                            <p class="text-xs text-gray-500 italic mb-2">Hemileia vastatrix</p>
+                            <p class="text-sm text-gray-700">Bercak kuning keoranyean berbubuk di permukaan bawah daun. Menyebabkan daun gugur prematur dan tanaman gundul.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-stone-50/50 border border-stone-200">
+                            <h4 class="font-bold text-stone-900">Bercak Daun Cercospora</h4>
+                            <p class="text-xs text-gray-500 italic mb-2">Cercospora coffeicola</p>
+                            <p class="text-sm text-gray-700">Bercak cokelat melingkar dengan pusat berwarna abu-abu pada daun dan buah. Umumnya menyerang tanaman yang kurang mendapat naungan/nutrisi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Strategi PHT -->
+                <div class="bg-roast text-cream p-8 rounded-3xl">
+                    <h3 class="serif-font text-2xl font-bold text-amber-300 mb-4 flex items-center gap-2">
+                        <i class="fa-solid font-bold fa-shield-virus"></i> Pengendalian Hama Terpadu (PHT)
+                    </h3>
+                    <p class="text-amber-100/80 text-sm mb-6">PHT mengombinasikan berbagai teknik ramah lingkungan untuk menekan populasi hama tanpa merusak ekosistem kebun.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-espresso/60 p-5 rounded-xl border border-amber-500/20">
+                            <div class="text-amber-400 font-bold mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-scissors"></i> 1. Secara Mekanis & Kultur
+                            </div>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                Petik bubuk (sanitasi buah terinfeksi), pemangkasan teratur untuk menjaga sirkulasi udara & sinar matahari, serta penggunaan perangkap senyawa hipothenemus (Hypotan).
+                            </p>
+                        </div>
+
+                        <div class="bg-espresso/60 p-5 rounded-xl border border-amber-500/20">
+                            <div class="text-amber-400 font-bold mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-bug"></i> 2. Secara Hayati / Biologi
+                            </div>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                Memanfaatkan jamur parasit entomopatogen seperti <em>Beauveria bassiana</em> untuk membasmi kumbang PBKo, atau memelihara musuh alami (semut hitam).
+                            </p>
+                        </div>
+
+                        <div class="bg-espresso/60 p-5 rounded-xl border border-amber-500/20">
+                            <div class="text-amber-400 font-bold mb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-vial"></i> 3. Secara Kimiawi (Langkah Terakhir)
+                            </div>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                Penggunaan pestisida/fungisida berbasis tembaga yang bijaksana dan terukur hanya jika tingkat serangan telah melewati ambang batas ekonomi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: KUIS INTERAKTIF -->
+        <section id="tab-content-kuis" class="tab-content hidden space-y-8">
+            <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-mocha/10 max-w-3xl mx-auto">
+                <div class="text-center mb-8">
+                    <span class="text-amber-700 font-semibold text-sm uppercase tracking-wider">Uji Pengetahuan</span>
+                    <h2 class="serif-font text-3xl font-bold text-espresso mt-1">Kuis Trivia Kopi Nusantara</h2>
+                    <p class="text-gray-600 text-sm mt-2">Jawab pertanyaan berikut untuk mengetes pemahaman Anda tentang dunia kopi!</p>
+                </div>
+
+                <!-- Quiz Form Container -->
+                <div id="quiz-box" class="space-y-6">
+                    <!-- Dynamic Question Rendering -->
+                </div>
+
+                <div id="quiz-result" class="hidden text-center p-8 bg-warmgray rounded-2xl border border-mocha/20">
+                    <h3 class="serif-font text-3xl font-bold text-espresso mb-2">Hasil Kuis Anda</h3>
+                    <p id="quiz-score-text" class="text-4xl font-extrabold text-mocha my-4">0 / 5</p>
+                    <p id="quiz-feedback" class="text-gray-700 font-medium mb-6"></p>
+                    <button onclick="resetQuiz()" class="px-6 py-3 rounded-xl bg-mocha text-white font-semibold hover:bg-espresso transition">
+                        Coba Lagi <i class="fa-solid fa-rotate-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Interactive Brewing Calculator Section -->
+    <section id="brewing-calc" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-16">
+        <div class="bg-gradient-to-r from-roast to-espresso text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10">
+                <div>
+                    <span class="text-amber-400 font-bold text-xs uppercase tracking-widest">Fitur Interaktif Praktis</span>
+                    <h3 class="serif-font text-3xl sm:text-4xl font-bold text-cream mt-2 mb-4">Kalkulator Rasio Seduh Kopi</h3>
+                    <p class="text-amber-100/80 text-sm leading-relaxed mb-6">
+                        Hitung takaran air dan bubuk kopi secara presisi sesuai metode seduh favorit Anda untuk hasil seduhan terbaik.
+                    </p>
+                    <div class="flex items-center gap-4 text-xs text-amber-200">
+                        <span><i class="fa-solid fa-check text-amber-400 mr-1"></i> Presisi tinggi</span>
+                        <span><i class="fa-solid fa-check text-amber-400 mr-1"></i> V60 & French Press</span>
+                    </div>
+                </div>
+
+                <div class="bg-cream text-espresso p-6 rounded-2xl shadow-lg space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Pilih Metode Seduh</label>
+                        <select id="brew-method" class="w-full p-3 rounded-xl border border-gray-300 bg-white text-sm focus:ring-2 focus:ring-mocha outline-none" onchange="calculateBrew()">
+                            <option value="15">V60 / Pour Over (Rasio 1 : 15)</option>
+                            <option value="12">French Press (Rasio 1 : 12)</option>
+                            <option value="10">Aeropress (Rasio 1 : 10)</option>
+                            <option value="16">Kopi Tubruk (Rasio 1 : 16)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 mb-1">Jumlah Kopi Bubuk (Gram)</label>
+                        <input type="number" id="coffee-grams" value="15" min="1" max="100" class="w-full p-3 rounded-xl border border-gray-300 bg-white text-sm focus:ring-2 focus:ring-mocha outline-none" oninput="calculateBrew()">
+                    </div>
+
+                    <div class="p-4 bg-warmgray rounded-xl border border-mocha/10 text-center">
+                        <span class="text-xs text-gray-500 font-semibold block">Kebutuhan Air Panas</span>
+                        <span id="water-result" class="text-3xl font-extrabold text-mocha">225 ml</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-espresso text-amber-100/70 border-t border-mocha/40 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex justify-center items-center gap-2 text-cream font-bold text-xl serif-font">
+                <i class="fa-solid fa-mug-hot text-amber-500"></i> Ensiklopedia Kopi Indonesia
+            </div>
+            <p class="text-xs text-amber-200/60 max-w-md mx-auto">
+                Edukasi lengkap seputar kopi dari rantai hulu (perkebunan) hingga hilir (cangkir seduh). Dibuat untuk pecinta & petani kopi Nusantara.
+            </p>
+            <p class="text-xs text-amber-200/40 pt-4 border-t border-mocha/30">
+                &copy; 2026 Nusantara Coffee Guide. Semua Hak Cipta Dilindungi.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Quiz Data
+        const quizQuestions = [
+            {
+                q: "Spesies biji kopi mana yang memiliki kandungan kafein paling tinggi?",
+                options: ["Arabika", "Robusta", "Liberika", "Ekselsa"],
+                answer: 1
+            },
+            {
+                q: "Pada ketinggian berapa biji kopi Arabika idealnya ditanam?",
+                options: ["0 - 400 mdpl", "400 - 800 mdpl", "1.000 - 2.000 mdpl", "Di atas 3.000 mdpl saja"],
+                answer: 2
+            },
+            {
+                q: "Apa sebutan untuk buah kopi matang berwarna merah sempurna yang dipetik saat harvest?",
+                options: ["Green Bean", "Red Cherry", "Black Cherry", "Pulp"],
+                answer: 1
+            },
+            {
+                q: "Hama serangga utama yang menggerogoti dan berlubang pada buah kopi adalah...",
+                options: ["Lalat Buah", "Kutu Hijau", "Bubuk Buah Kopi (PBKo)", "Ulat Grayak"],
+                answer: 2
+            },
+            {
+                q: "Penyakit Karat Daun pada tanaman kopi disebabkan oleh jamur...",
+                options: ["Hemileia vastatrix", "Cercospora", "Fusarium", "Phytophthora"],
+                answer: 0
+            }
+        ];
+
+        let userAnswers = {};
+
+        // Navigation Tab Switching
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Remove active class from buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('bg-roast', 'text-white');
+                btn.classList.add('text-espresso');
+            });
+
+            // Show current tab content
+            const activeContent = document.getElementById(`tab-content-${tabId}`);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+            }
+
+            // Set active button style
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Scroll smoothly to tab bar
+            document.getElementById('tab-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function switchSection(sectionId) {
+            if (sectionId === 'hero') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
+
+        function scrollToBrewing() {
+            document.getElementById('brewing-calc').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Brew Calculator Logic
+        function calculateBrew() {
+            const ratio = parseFloat(document.getElementById('brew-method').value);
+            const grams = parseFloat(document.getElementById('coffee-grams').value) || 0;
+            const water = ratio * grams;
+            document.getElementById('water-result').innerText = `${water} ml`;
+        }
+
+        // Quiz Logic Render
+        function renderQuiz() {
+            const box = document.getElementById('quiz-box');
+            box.innerHTML = '';
+
+            quizQuestions.forEach((q, idx) => {
+                const qEl = document.createElement('div');
+                qEl.className = 'p-5 rounded-2xl bg-warmgray/60 border border-mocha/10 space-y-3';
+                
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="flex items-center gap-3 p-3 rounded-xl bg-white border border-gray-200 cursor-pointer hover:bg-amber-50 transition text-sm font-medium">
+                            <input type="radio" name="q${idx}" value="${optIdx}" onchange="selectAnswer(${idx}, ${optIdx})" class="text-mocha focus:ring-mocha">
+                            <span>${opt}</span>
+                        </label>
+                    `;
+                });
+
+                qEl.innerHTML = `
+                    <p class="font-bold text-espresso text-base">${idx + 1}. ${q.q}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                        ${optionsHTML}
+                    </div>
+                `;
+                box.appendChild(qEl);
+            });
+
+            // Submit Button
+            const submitBtn = document.createElement('button');
+            submitBtn.className = 'w-full py-4 rounded-xl bg-mocha hover:bg-espresso text-white font-bold text-lg transition shadow-lg mt-4';
+            submitBtn.innerText = 'Kirim Jawaban Kuis';
+            submitBtn.onclick = submitQuiz;
+            box.appendChild(submitBtn);
+        }
+
+        function selectAnswer(qIdx, optIdx) {
+            userAnswers[qIdx] = optIdx;
+        }
+
+        function submitQuiz() {
+            if (Object.keys(userAnswers).length < quizQuestions.length) {
+                alert('Harap jawab semua pertanyaan kuis terlebih dahulu!');
+                return;
+            }
+
+            let score = 0;
+            quizQuestions.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score++;
+                }
+            });
+
+            document.getElementById('quiz-box').classList.add('hidden');
+            const resultBox = document.getElementById('quiz-result');
+            resultBox.classList.remove('hidden');
+
+            document.getElementById('quiz-score-text').innerText = `${score} / ${quizQuestions.length}`;
+
+            let feedback = "";
+            if (score === 5) {
+                feedback = "Sempurna! Anda adalah seorang Pakar/Barista Kopi sejati!";
+            } else if (score >= 3) {
+                feedback = "Hebat! Pengetahuan Anda tentang kopi sudah sangat baik.";
+            } else {
+                feedback = "Bagus! Silakan baca materi di tab sebelumnya untuk memperdalam wawasan kopi Anda.";
+            }
+            document.getElementById('quiz-feedback').innerText = feedback;
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-box').classList.remove('hidden');
+            renderQuiz();
+        }
+
+        // Initialize App on Load
+        window.onload = function() {
+            renderQuiz();
+            calculateBrew();
+        };
+    </script>
+</body>
+</html>
